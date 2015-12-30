@@ -20,4 +20,7 @@
 - (void)dc_updateWithDictionary:(NSDictionary *)dictionary;
 - (void)dc_updateWithDictionary:(NSDictionary *)dictionary configuration:(DCParserConfiguration *)configuration;
 
+- (NSDictionary *)dc_serializeObject;
+- (NSDictionary *)dc_serializeObjectWithConfiguration:(DCParserConfiguration *)configuration;
+
 @end

@@ -47,4 +47,16 @@
     return [parser updateObject:self withDictionary:dictionary];
 }
 
+- (NSDictionary *)dc_serializeObject
+{
+    DCKeyValueObjectMapping *parser = [DCKeyValueObjectMapping mapperForClass:[self class]];
+    return [parser serializeObject:self];
+}
+
+- (NSDictionary *)dc_serializeObjectWithConfiguration:(DCParserConfiguration *)configuration
+{
+    DCKeyValueObjectMapping *parser = [DCKeyValueObjectMapping mapperForClass:[self class] andConfiguration:configuration];
+    return [parser serializeObject:self];
+}
+
 @end
