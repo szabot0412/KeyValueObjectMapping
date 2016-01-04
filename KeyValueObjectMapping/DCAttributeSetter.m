@@ -26,7 +26,6 @@
                 [object setValue:value forKey:attributeName];
             }
             @catch (NSException *e) {
-                [object setValue:@(0) forKey:attributeName];
             }
         }
     }
