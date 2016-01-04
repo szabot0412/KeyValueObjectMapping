@@ -12,6 +12,8 @@
 #import "DCSimpleConverter.h"
 #import "DCNSArrayConverter.h"
 #import "DCNSSetConverter.h"
+#import "DCNSStringConverter.h"
+#import "DCNSNumberConverter.h"
 #import "DCCustomParser.h"
 #import "DCKeyValueObjectMapping.h"
 
@@ -29,10 +31,13 @@
     if (self) {
         _configuration = configuration;
         _parsers = [NSArray arrayWithObjects:
-                   [DCNSDateConverter dateConverterForPattern:self.configuration.datePattern],
-                   [DCNSURLConverter urlConverter],
-                   [DCNSArrayConverter arrayConverterForConfiguration: self.configuration], 
-                   [DCNSSetConverter setConverterForConfiguration: self.configuration], nil];
+                    [DCNSDateConverter dateConverterForPattern:self.configuration.datePattern],
+                    [DCNSURLConverter urlConverter],
+                    [DCNSArrayConverter arrayConverterForConfiguration: self.configuration],
+                    [DCNSSetConverter setConverterForConfiguration: self.configuration],
+                    [DCNSNumberConverter numberConverter],
+                    [DCNSStringConverter stringConverter],
+                    nil];
     }
     return self;
 }
