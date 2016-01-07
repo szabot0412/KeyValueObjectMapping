@@ -49,13 +49,7 @@
 
 - (NSDictionary *)dc_serializeObject
 {
-    return [self dc_serializeObjectMappedAttributesOnly:NO];
-}
-
-- (NSDictionary *)dc_serializeObjectMappedAttributesOnly:(BOOL)mappedOnly
-{
-    DCKeyValueObjectMapping *parser = [DCKeyValueObjectMapping mapperForClass:[self class]];
-    return [parser serializeObject:self mappedAttributesOnly:mappedOnly];
+    return [self dc_serializeObjectWithConfiguration:nil mappedAttributesOnly:NO];
 }
 
 - (NSDictionary *)dc_serializeObjectWithConfiguration:(DCParserConfiguration *)configuration
