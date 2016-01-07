@@ -21,6 +21,8 @@
 - (void)dc_updateWithDictionary:(NSDictionary *)dictionary configuration:(DCParserConfiguration *)configuration;
 
 - (NSDictionary *)dc_serializeObject;
+- (NSDictionary *)dc_serializeObjectMappedAttributesOnly:(BOOL)mappedOnly;
 - (NSDictionary *)dc_serializeObjectWithConfiguration:(DCParserConfiguration *)configuration;
+- (NSDictionary *)dc_serializeObjectWithConfiguration:(DCParserConfiguration *)configuration mappedAttributesOnly:(BOOL)mappedOnly;
 
 @end
