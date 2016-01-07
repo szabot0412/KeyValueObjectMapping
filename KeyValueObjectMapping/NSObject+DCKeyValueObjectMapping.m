@@ -49,14 +49,24 @@
 
 - (NSDictionary *)dc_serializeObject
 {
+    return [self dc_serializeObjectMappedAttributesOnly:NO];
+}
+
+- (NSDictionary *)dc_serializeObjectMappedAttributesOnly:(BOOL)mappedOnly
+{
     DCKeyValueObjectMapping *parser = [DCKeyValueObjectMapping mapperForClass:[self class]];
-    return [parser serializeObject:self];
+    return [parser serializeObject:self mappedAttributesOnly:mappedOnly];
 }
 
 - (NSDictionary *)dc_serializeObjectWithConfiguration:(DCParserConfiguration *)configuration
 {
+    return [self dc_serializeObjectWithConfiguration:configuration mappedAttributesOnly:NO];
+}
+
+- (NSDictionary *)dc_serializeObjectWithConfiguration:(DCParserConfiguration *)configuration mappedAttributesOnly:(BOOL)mappedOnly
+{
     DCKeyValueObjectMapping *parser = [DCKeyValueObjectMapping mapperForClass:[self class] andConfiguration:configuration];
-    return [parser serializeObject:self];
+    return [parser serializeObject:self mappedAttributesOnly:mappedOnly];
 }
 
 @end

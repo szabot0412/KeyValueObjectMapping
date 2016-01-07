@@ -27,7 +27,9 @@
 - (NSArray *)parseArray:(NSArray *)array forParentObject:(id)parentObject;
 
 - (NSDictionary *)serializeObject:(id)object;
+- (NSDictionary *)serializeObject:(id)object mappedAttributesOnly:(BOOL)mappedOnly;
 - (NSArray *)serializeObjectArray:(NSArray *)objectArray;
+- (NSArray *)serializeObjectArray:(NSArray *)objectArray mappedAttributesOnly:(BOOL)mappedOnly;
 
 - (void)updateObject:(id)object withDictionary:(NSDictionary *)dictionary;
 
