@@ -2,7 +2,7 @@
 //  KeyValueObjectMapping.h
 //  KeyValueObjectMapping
 //
-//  Created by felipowsky on 12/30/15.
+//  Created by Felipe Augusto Imianowsky on 12/30/15.
 //  Copyright © 2015 None. All rights reserved.
 //
 
