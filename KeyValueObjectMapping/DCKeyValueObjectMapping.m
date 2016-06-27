@@ -85,6 +85,25 @@
     return object;
 }
 
+- (void)setValuesOnObject: (id) object withDictionary: (NSDictionary *) dictionary {
+    if(![[object class] isSubclassOfClass:self.classToGenerate]){
+        return;
+    }
+    
+    dictionary = [DCDictionaryRearranger rearrangeDictionary:dictionary 
+                                              forConfiguration:self.configuration];
+    
+    NSArray *keys = [dictionary allKeys];
+    for (NSString *key in keys) {
+        id value = [dictionary valueForKey:key];
+        DCDynamicAttribute *dynamicAttribute = [self.propertyFinder findAttributeForKey:key
+                                                                                onClass:self.classToGenerate];
+        if(dynamicAttribute){
+            [self parseValue:value forObject:object inAttribute:dynamicAttribute dictionary:dictionary];
+        }
+    }
+}
+
 - (NSDictionary *)serializeObject:(id)object
 {    
     return [self serializeObject:object mappedAttributesOnly:NO];
@@ -183,25 +202,6 @@
     else
         value = [self.converter serializeValue:value forDynamicAttribute:dynamicAttribute];
     [dictionary setValue:value forKeyPath:objectMapping.keyReference];
-}
-
-- (void) setValuesOnObject: (id) object withDictionary: (NSDictionary *) dictionary {
-    if([object class] != self.classToGenerate){
-        return;
-    }
-    
-    dictionary = [DCDictionaryRearranger rearrangeDictionary:dictionary
-                                            forConfiguration:self.configuration];
-    
-    NSArray *keys = [dictionary allKeys];
-    for (NSString *key in keys) {
-        id value = [dictionary valueForKey:key];
-        DCDynamicAttribute *dynamicAttribute = [self.propertyFinder findAttributeForKey:key
-                                                                                onClass:self.classToGenerate];
-        if(dynamicAttribute){
-            [self parseValue:value forObject:object inAttribute:dynamicAttribute dictionary:dictionary];
-        }
-    }
 }
 
 - (NSArray *)propertiesOfObject:(id)object
