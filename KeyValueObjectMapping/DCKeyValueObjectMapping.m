@@ -135,17 +135,20 @@
         }
     }
     
-    for (DCObjectMapping *mapping in self.propertyFinder.mappers) {
-        NSString * attributeName = mapping.attributeName;
-        id value = [object valueForKey:attributeName];
-        if (value == nil) {
-            value = [NSNull null];
-        }
+    for (DCObjectMapping *mapping in self.propertyFinder.mappers) {        
+        if([[object class] isSubclassOfClass:mapping.classReference]){
+
+            NSString * attributeName = mapping.attributeName;
+            id value = [object valueForKey:attributeName];
+            if (value == nil) {
+                value = [NSNull null];
+            }
         
-        DCDynamicAttribute *dynamicAttribute = [self.propertyFinder findAttributeForKey:mapping.keyReference onClass:self.classToGenerate];
+            DCDynamicAttribute *dynamicAttribute = [self.propertyFinder findAttributeForKey:mapping.keyReference onClass:self.classToGenerate];
         
-        if (dynamicAttribute) {
-            [self serializeValue:value toDictionary:serializedObject inAttribute:dynamicAttribute];
+            if (dynamicAttribute) {
+                [self serializeValue:value toDictionary:serializedObject inAttribute:dynamicAttribute];
+            }
         }
     }
     
