@@ -130,7 +130,15 @@
                 if (value == nil) {
                     value = [NSNull null];
                 }
-                [serializedObject setValue:value forKey:property];
+                
+                if(value!=nil && [value isKindOfClass:[NSArray class]])
+                {
+                    [serializedObject setValue:[self serializeObjectArray:value] forKey:property];
+                }
+                else
+                {
+                    [serializedObject setValue:value forKey:property];
+                }
             }
         }
     }
@@ -147,7 +155,17 @@
             DCDynamicAttribute *dynamicAttribute = [self.propertyFinder findAttributeForKey:mapping.keyReference onClass:self.classToGenerate];
         
             if (dynamicAttribute) {
-                [self serializeValue:value toDictionary:serializedObject inAttribute:dynamicAttribute];
+                
+                if(value!=nil && [value isKindOfClass:[NSArray class]])
+                {
+                    [self serializeValue:[self serializeObjectArray:value] toDictionary:serializedObject inAttribute:dynamicAttribute];
+                }
+                else
+                {
+                    [self serializeValue:value toDictionary:serializedObject inAttribute:dynamicAttribute];
+                }
+                
+                
             }
         }
     }
